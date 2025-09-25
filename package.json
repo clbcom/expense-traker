@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "expense-traker",
+  "version": "0.1.0",
+  "description": "",
+  "main": "expense-traker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.0",
+  "dependencies": {
+    "commander": "^14.0.1"
+  }
+}
