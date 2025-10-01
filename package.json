@@ -3,8 +3,9 @@
   "name": "expense-traker",
   "version": "0.1.0",
   "description": "",
-  "main": "expense-traker.js",
+  "main": "app.ts",
   "scripts": {
+    "start": "node expense-traker.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,5 +14,8 @@
   "packageManager": "pnpm@10.17.0",
   "dependencies": {
     "commander": "^14.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2"
   }
 }

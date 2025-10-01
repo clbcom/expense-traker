@@ -1,24 +1,21 @@
 import { Command } from "commander"
+import { add } from './src/command/index.js'
 
 const program = new Command();
-
-interface newGasto {
-  description: string,
-  amount: string
-}
 
 program
   .name("expense-traker")
   .description("CLI para gestionar los gastos.")
   .version("0.1.0");
 
-program.command("add",)
+program.command("add")
   .description("Agrega un nuevo gasto")
   .option("--description <DESC>", "Descripcion del gasto")
   .option("--amount <AMOUNT>", "Monto del gasto")
-  .action((args: newGasto) => {
-    // TODO: Crear un validador para cuando no se ingresen datos
-  });
+  .action(function (opts) {
+    add(opts).catch(err => this.error(err))
+  })
+
 
 program.command('update')
   .description('Edita la descripcion o el monto de un gasto con el ID pasado como argumento')
