@@ -1,5 +1,5 @@
 import { Command } from "commander"
-import { add, list } from './src/command/index.js'
+import { add, list, remove } from './src/command/index.js'
 
 const program = new Command();
 
@@ -22,6 +22,8 @@ program.command('update')
 
 program.command('delete')
   .description('Elimina una gasto con el id pasado por argumento')
+  .option('--id <ID>', 'ID del gasto a eliminar.')
+  .action(remove);
 
 program.command('summary')
   .description('Muestra la suma total de todos los gastos, asi como tambien de cada mes')
