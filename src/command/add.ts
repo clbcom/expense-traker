@@ -6,7 +6,7 @@ async function add({ description, amount }: any): Promise<void> {
 
 	try {
 		if (!description || !amount) {
-			return Promise.reject('Error: debe ingresar la descripcion y el monto del gasto: WOMPP')
+			return Promise.reject('Error: debe ingresar la descripcion y el monto del gasto.')
 		}
 		let fileHandle: fs.FileHandle;
 		await fs.mkdir(USERFILESDIR, { recursive: true });
@@ -17,6 +17,7 @@ async function add({ description, amount }: any): Promise<void> {
 			id: expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 1,
 			description,
 			amount: parseFloat(amount),
+			// TODO: solucionar problema de guardar la fecha como date o number
 			create_at: new Date(),
 		}
 		expenses.push(newExpense);
