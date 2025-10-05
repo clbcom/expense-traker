@@ -1,5 +1,5 @@
 import { Command } from "commander"
-import { add } from './src/command/index.js'
+import { add, list } from './src/command/index.js'
 
 const program = new Command();
 
@@ -10,8 +10,8 @@ program
 
 program.command("add")
   .description("Agrega un nuevo gasto")
-  .option("--description <DESC>", "Descripcion del gasto")
-  .option("--amount <AMOUNT>", "Monto del gasto")
+  .option("-d, --description <DESC>", "Descripcion del gasto")
+  .option("-a, --amount <AMOUNT>", "Monto del gasto")
   .action(function (opts) {
     add(opts).catch(err => this.error(err))
   })
@@ -28,5 +28,7 @@ program.command('summary')
 
 program.command('list')
   .description('Lista todas los gastos del mas nuevo al mas viejo')
+  .option('-m, --month <MONTH>', 'Lista los gastos del mes pasado como argumento (Enero = 1)')
+  .action(list)
 
 program.parse();
