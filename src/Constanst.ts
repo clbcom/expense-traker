@@ -13,4 +13,8 @@ const ROOTDIR = `${getDirName()}/..`;
 const USERFILESDIR = `${ROOTDIR}/user_files`;
 const EXPENSESFILE = `${USERFILESDIR}/expenses.json`;
 
-export { getFileName, getDirName, ROOTDIR, USERFILESDIR, EXPENSESFILE };
+const mesesString = [
+	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+	'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+export { getFileName, getDirName, mesesString, ROOTDIR, USERFILESDIR, EXPENSESFILE };

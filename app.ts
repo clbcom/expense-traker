@@ -1,5 +1,5 @@
 import { Command } from "commander"
-import { add, list, remove } from './src/command/index.js'
+import { add, list, remove, summary } from './src/command/index.js'
 
 const program = new Command();
 
@@ -16,7 +16,6 @@ program.command("add")
     add(opts).catch(err => this.error(err))
   })
 
-
 program.command('update')
   .description('Edita la descripcion o el monto de un gasto con el ID pasado como argumento')
 
@@ -27,6 +26,8 @@ program.command('delete')
 
 program.command('summary')
   .description('Muestra la suma total de todos los gastos, asi como tambien de cada mes')
+  .option('-m, --month <MONTH>', 'Obtiene el total de gastos del mes (Enero = 1)')
+  .action(summary)
 
 program.command('list')
   .description('Lista todas los gastos del mas nuevo al mas viejo')
