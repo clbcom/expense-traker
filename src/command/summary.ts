@@ -2,14 +2,12 @@ import fs from 'node:fs/promises';
 import type { Expense } from '../interfaces/Expense.js';
 import { EXPENSESFILE, mesesString } from '../Constanst.js';
 import { randomUUID } from 'node:crypto';
+import { readExpensesFromFile } from '../IO/FileHandler.js';
 
 const summary = async ({ month }: any) => {
   try {
     // leemos gastos
-    const data = await fs.readFile(EXPENSESFILE, { encoding: 'utf8' });
-    let expenses: Array<Expense> = data
-      ? JSON.parse(data, (key, value) => key === 'create_at' ? new Date(value) : value)
-      : [];
+    let expenses: Array<Expense> = await readExpensesFromFile();
 
     // filtramos por mes (si existe argumento mes)
     let monthNum: number = parseInt(month) - 1;

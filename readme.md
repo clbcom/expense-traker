@@ -8,8 +8,8 @@ La aplicacion debera correr desde la linea de comandos cumpliendo las siguientes
 - [ ] Actualizar un gasto.
 - [x] Eliminar un gasto.
 - [x] Listar todos los gastos.
-- [ ] Listar el total de todos los gastos.
-- [ ] Listar el total de gastos de un mes en especifico.
+- [x] Listar el total de todos los gastos.
+- [x] Listar el total de gastos de un mes en especifico.
 - [ ] Crear categorias de gastos.
 - [ ] Listar gastos por categoria.
 

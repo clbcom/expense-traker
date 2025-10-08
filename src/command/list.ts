@@ -1,17 +1,11 @@
-import fs from 'fs/promises';
-import { EXPENSESFILE } from '../Constanst.js';
 import type { Expense } from '../interfaces/Expense.js';
 import Table from 'cli-table3';
+import { readExpensesFromFile } from '../IO/FileHandler.js';
 
 const list = async ({ month }: any) => {
   try {
-    let data = await fs.readFile(EXPENSESFILE, { encoding: 'utf-8' });
-    let expenses: Array<Expense> = data
-      ? JSON.parse(data, (key, value) => key === 'create_at'
-        ? new Date(value)
-        : value)
-      : [];
-    expenses = month
+    let expenses: Array<Expense> = await readExpensesFromFile();
+    expenses = month // filtra de acuerdo al mes indicado 
       ? expenses.filter(({ create_at }) => create_at.getMonth() === parseInt(month) - 1)
       : expenses;
 
