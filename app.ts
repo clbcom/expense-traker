@@ -1,5 +1,6 @@
 import { Command } from "commander"
 import { add, list, remove, summary } from './src/command/index.js'
+import update from "./src/command/update.js";
 
 const program = new Command();
 
@@ -18,6 +19,10 @@ program.command("add")
 
 program.command('update')
   .description('Edita la descripcion o el monto de un gasto con el ID pasado como argumento')
+  .option('--id <ID>', 'ID del gasto a editar')
+  .option('-d, --description <DESCRIPTION>', 'Nueva descripcion')
+  .option('-a, --amount <AMOUNT>', 'Nuevo monto')
+  .action(update);
 
 program.command('delete')
   .description('Elimina una gasto con el id pasado por argumento')

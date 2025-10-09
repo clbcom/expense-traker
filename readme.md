@@ -5,7 +5,7 @@ Es un proyecto tomado de la pagina de [Roadmap](https://roadmap.sh/projects/expe
 ## Requerimientos
 La aplicacion debera correr desde la linea de comandos cumpliendo las siguientes caracteristicas:
 - [x] Agregar un gasto con la descripcion y el monto.
-- [ ] Actualizar un gasto.
+- [x] Actualizar un gasto.
 - [x] Eliminar un gasto.
 - [x] Listar todos los gastos.
 - [x] Listar el total de todos los gastos.
