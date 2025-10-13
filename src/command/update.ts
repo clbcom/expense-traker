@@ -1,6 +1,12 @@
 import { Expense } from "../interfaces/Expense.js";
 import { readExpensesFromFile, writeExpensesToFile } from "../IO/FileHandler.js";
 
+interface updateArguments {
+  id: string,
+  amount?: string,
+  description?: string
+}
+
 /**
  * Actualiza un gasto existente en el archivo de gastos.
  *
@@ -15,12 +21,6 @@ import { readExpensesFromFile, writeExpensesToFile } from "../IO/FileHandler.js"
  * @param {string} [params.description] - Nueva descripción del gasto (opcional).
  * @returns {Promise<void>} Una promesa que se resuelve cuando la operación ha finalizado.
  */
-
-interface updateArguments {
-  id: string,
-  amount?: string,
-  description?: string
-}
 const update = async ({ id, amount, description }: updateArguments) => {
   try {
     if (!amount && !description)
@@ -49,7 +49,7 @@ const update = async ({ id, amount, description }: updateArguments) => {
     await writeExpensesToFile(expenses);
     console.log(`Gasto [${id}] editado correctamente`);
   } catch (error: any) {
-    console.error(`Error: ${error.message}`)
+    console.error(`Error al editar: ${error.message}`)
   }
 }
 

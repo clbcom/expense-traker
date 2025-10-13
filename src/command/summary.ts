@@ -1,18 +1,31 @@
-import fs from 'node:fs/promises';
 import type { Expense } from '../interfaces/Expense.js';
-import { EXPENSESFILE, mesesString } from '../Constanst.js';
-import { randomUUID } from 'node:crypto';
+import { mesesString } from '../Constanst.js';
 import { readExpensesFromFile } from '../IO/FileHandler.js';
 
-const summary = async ({ month }: any) => {
+interface summaryArguments {
+  month?: string
+}
+/**
+ * Genera y muestra un resumen de los gastos para un mes específico o para todos los meses si no se especifica el mes.
+ *
+ * @param {Object} params - Objeto de parámetros.
+ * @param {string} [params.month] - El mes (como número en formato string, por ejemplo "1" para enero) para filtrar los gastos. Si se omite, se resumen todos los gastos.
+ * @returns {Promise<void>} Resuelve cuando el resumen ha sido mostrado por consola.
+ *
+ * @throws Imprime cualquier error encontrado durante la lectura o el procesamiento de los gastos.
+ */
+const summary = async ({ month }: summaryArguments) => {
   try {
     // leemos gastos
     let expenses: Array<Expense> = await readExpensesFromFile();
 
     // filtramos por mes (si existe argumento mes)
-    let monthNum: number = parseInt(month) - 1;
+    let monthNum: number = month ? (parseInt(month) - 1) : -1;
     let monthString: string = mesesString[monthNum];
-    expenses = month
+    if (isNaN(monthNum)) {
+      throw Error(`Argumento <<${month}>> invalido`)
+    }
+    expenses = monthNum
       ? expenses.filter((value) => value.create_at.getMonth() === monthNum)
       : expenses;
 
@@ -21,7 +34,7 @@ const summary = async ({ month }: any) => {
       id: 999,
       amount: 0,
       description: 'Total de todos los gastos',
-      create_at: month ? new Date(1, month) : new Date
+      create_at: month ? new Date(1, monthNum) : new Date
     }
     const totalExpense = expenses.reduce(({ amount, ...other }, currentExpense) => ({
       amount: amount + currentExpense.amount,
@@ -30,8 +43,8 @@ const summary = async ({ month }: any) => {
 
     let outputMessage: string = `Total gasto ${monthString ?? ''}: ${totalExpense.amount}`
     console.log(outputMessage)
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    console.error(`Error al obtener el total: ${error.message}`)
   }
 }
 

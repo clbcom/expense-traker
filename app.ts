@@ -4,18 +4,18 @@ import update from "./src/command/update.js";
 
 const program = new Command();
 
+// Inicializacion
 program
   .name("expense-traker")
   .description("CLI para gestionar los gastos.")
   .version("0.1.0");
 
+// Comandos
 program.command("add")
   .description("Agrega un nuevo gasto")
   .option("-d, --description <DESC>", "Descripcion del gasto")
   .option("-a, --amount <AMOUNT>", "Monto del gasto")
-  .action(function (opts) {
-    add(opts).catch(err => this.error(err))
-  })
+  .action(add)
 
 program.command('update')
   .description('Edita la descripcion o el monto de un gasto con el ID pasado como argumento')
@@ -39,4 +39,5 @@ program.command('list')
   .option('-m, --month <MONTH>', 'Lista los gastos del mes pasado como argumento (Enero = 1)')
   .action(list)
 
+// Ejecucion
 program.parse();
